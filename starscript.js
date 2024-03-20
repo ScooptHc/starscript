@@ -27,7 +27,7 @@ panel.appendChild(captionBar);
 // Create the title
 const title = document.createElement('span');
 title.classList.add('title');
-title.textContent = 'Menuv2.js';
+title.textContent = 'Starscript / Developed by Russia';
 title.style.color = 'white'; // Font color
 captionBar.appendChild(title);
 
@@ -44,6 +44,33 @@ closeBtn.onclick = function() {
   panel.style.display = 'none';
 };
 captionBar.appendChild(closeBtn);
+
+const resetButton22 = document.createElement('button');
+resetButton22.textContent = 'Reset All Players Gold';
+resetButton22.style.position = 'absolute';
+resetButton22.style.top = '150px'; // Same position as the Always Triple Gold button
+resetButton22.style.padding = '10px'; // Increased padding
+resetButton22.style.borderRadius = '10px'; // Rounded button
+resetButton22.style.backgroundColor = 'rgb(10, 10, 10)'; // Background color
+resetButton22.style.color = 'white'; // Font color
+resetButton22.style.border = 'none'; // Remove border
+resetButton22.style.fontFamily = 'Arial, sans-serif'; // Font family
+resetButton22.style.fontSize = '16px'; // Font size
+captionBar.appendChild(resetButton22);
+
+const resetButton2 = document.createElement('button');
+resetButton2.textContent = 'Activate Swap Mode';
+resetButton2.style.position = 'absolute';
+resetButton2.style.top = '70px'; // Same position as the Always Triple Gold button
+resetButton2.style.right = '170px'; // Adjusted position to be to the right of the Always Triple Gold button
+resetButton2.style.padding = '10px'; // Increased padding
+resetButton2.style.borderRadius = '10px'; // Rounded button
+resetButton2.style.backgroundColor = 'rgb(10, 10, 10)'; // Background color
+resetButton2.style.color = 'white'; // Font color
+resetButton2.style.border = 'none'; // Remove border
+resetButton2.style.fontFamily = 'Arial, sans-serif'; // Font family
+resetButton2.style.fontSize = '16px'; // Font size
+captionBar.appendChild(resetButton2);
 
 const resetButton = document.createElement('button');
 resetButton.textContent = 'Answers Always Correct';
@@ -188,7 +215,115 @@ resetButton.addEventListener('click', () => {
 
 
     
+
+
+    
   }, 500);
+});
+
+
+resetButton2.addEventListener('click', () => {
+  resetButton2.style.backgroundColor = 'green';
+  setTimeout(() => {
+    resetButton2.style.backgroundColor = 'rgb(10, 10, 10)'; // Reverts to original color
+    (() => {
+    const cheat = (async () => {
+        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+            stateNode.setState({
+                players: (players ? Object.entries(players).map(([name, { b, g }]) => ({
+                    name, blook: b, gold: g || 0
+                })).filter((e) => e.name != stateNode.props.client.name).sort(({ gold }, { gold: gold2 }) => gold2 - gold) : []),
+                ready: true,
+                phaseTwo: true,
+                stage: "prize",
+                choiceObj: { type: "swap" }
+            });
+        });
+    });
+    let img = new Image;
+    img.src = "https://raw.githubusercontent.com/Sh1N02/Blooket-Cheats/main/autoupdate/timestamps/gold/swapGold.png?" + Date.now();
+    img.crossOrigin = "Anonymous";
+    img.onload = function() {
+        const c = document.createElement("canvas");
+        const ctx = c.getContext("2d");
+        ctx.drawImage(img, 0, 0, this.width, this.height);
+        let { data } = ctx.getImageData(0, 0, this.width, this.height), decode = "", last;
+        for (let i = 0; i < data.length; i += 4) {
+            let char = String.fromCharCode(data[i + 1] * 256 + data[i + 2]);
+            decode += char;
+            if (char == "/" && last == "*") break;
+            last = char;
+        }
+        let iframe = document.querySelector("iframe");
+        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
+        if (parseInt(time) <= 1708817191576 || iframe.contentWindow.confirm(error)) cheat();
+    }
+    img.onerror = img.onabort = () => {
+        img.onerror = img.onabort = null;
+        cheat();
+        let iframe = document.querySelector("iframe");
+        iframe.contentWindow.alert("It seems the GitHub is either blocked or down.\n\nIf it's NOT blocked, join the Discord server for updates\nhttps://discord.gg/jHjGrrdXP6")
+    }
+})();
+     }, 500);
+});
+
+  resetButton22.addEventListener('click', () => {
+  resetButton22.style.backgroundColor = 'green';
+  setTimeout(() => {
+    resetButton22.style.backgroundColor = 'rgb(10, 10, 10)'; // Reverts to original color
+    (() => {
+    const cheat = (async () => {
+        let i = document.createElement('iframe');
+        document.body.append(i);
+        window.alert = i.contentWindow.alert.bind(window);
+        i.remove();
+        let { stateNode: { props, state } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        let count = 0;
+        props.liveGameController.getDatabaseVal("c", async (players) => {
+            if (players) for (const player of Object.keys(players)) {
+                props.liveGameController.setVal({
+                    path: "c/".concat(props.client.name),
+                    val: {
+                        b: props.client.blook,
+                        g: state.gold,
+                        tat: `${player}:swap:0`
+                    }
+                });
+                count++;
+                await new Promise(r => setTimeout(r, 4000));
+            }
+            alert(`Reset ${count} players' gold!`);
+        })
+        
+    });
+    let img = new Image;
+    img.src = "https://raw.githubusercontent.com/Sh1N02/Blooket-Cheats/main/autoupdate/timestamps/gold/resetAllGold.png?" + Date.now();
+    img.crossOrigin = "Anonymous";
+    img.onload = function() {
+        const c = document.createElement("canvas");
+        const ctx = c.getContext("2d");
+        ctx.drawImage(img, 0, 0, this.width, this.height);
+        let { data } = ctx.getImageData(0, 0, this.width, this.height), decode = "", last;
+        for (let i = 0; i < data.length; i += 4) {
+            let char = String.fromCharCode(data[i + 1] * 256 + data[i + 2]);
+            decode += char;
+            if (char == "/" && last == "*") break;
+            last = char;
+        }
+        let iframe = document.querySelector("iframe");
+        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
+        if (parseInt(time) <= 1708817191568 || iframe.contentWindow.confirm(error)) cheat();
+    }
+    img.onerror = img.onabort = () => {
+        img.onerror = img.onabort = null;
+        cheat();
+        let iframe = document.querySelector("iframe");
+        iframe.contentWindow.alert("It seems the GitHub is either blocked or down.\n\nIf it's NOT blocked, join the Discord server for updates\nhttps://discord.gg/jHjGrrdXP6")
+    }
+})();
+     }, 500);
 });
 
 // Make the panel draggable
